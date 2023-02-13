@@ -1,0 +1,95 @@
+pragma solidity >=0.7.0 <0.9.0;
+
+contract Structs{
+
+    struct struct_array{
+        string firstname;
+        string lastname;
+        string rollno ;
+    }
+   
+
+    struct_array[] public todo;
+    string[] public fname;
+    string[] public lname;
+    string[] public roll;
+
+        function add_fname(string memory _fname) public {
+            fname.push(_fname);
+        }
+        function add_lname(string memory _lname) public {
+            lname.push(_lname);
+        }
+        function add_roll(string memory _roll) public {
+            roll.push(_roll);
+        }
+
+
+    function getfname()public view returns(string[] memory){
+        return fname;
+    }
+    function getlname()public view returns(string[] memory){
+        return lname;
+    }
+    function getrollno()public view returns(string[] memory){
+        return roll;
+    }
+
+    //initialize array of struct with given input.
+    function Initialize_List()public {
+        uint len =fname.length;
+        for(uint i=0;i<len;i++){
+           todo.push(struct_array(fname[i],lname[i],roll[i]));
+        }
+       
+    }
+    
+    function get(uint i) public view returns(struct_array memory){
+        return todo[i];
+    }
+
+    //updating fistname .
+    function update_fname(string memory name,string memory _fupdate) public {
+
+       
+       uint len=todo.length;
+       for(uint i=0;i<len;i++){
+           if(keccak256(abi.encodePacked(todo[i].firstname)) == keccak256(abi.encodePacked(name)))
+           {
+               todo[i].firstname = _fupdate;
+           }
+       }
+
+    }
+     //updating lastname.
+    function update_lname(string memory name,string memory _lupdate) public {
+
+       
+       uint len=todo.length;
+       for(uint i=0;i<len;i++){
+           if(keccak256(abi.encodePacked(todo[i].lastname)) == keccak256(abi.encodePacked(name)))
+           {
+               todo[i].lastname = _lupdate;
+           }
+       }
+
+    }
+
+    //updating rollno .
+    function update_roll(string memory roll,string memory _rollupdate) public {
+
+       
+       uint len=todo.length;
+       for(uint i=0;i<len;i++){
+           if(keccak256(abi.encodePacked(todo[i].rollno)) == keccak256(abi.encodePacked(roll)))
+           {
+               todo[i].rollno = _rollupdate;
+           }
+       }
+
+    }
+ 
+ 
+ 
+}
+
